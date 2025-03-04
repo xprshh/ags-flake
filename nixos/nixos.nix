@@ -6,7 +6,7 @@
   username = "demeter";
 in {
   imports = [
-    /etc/nixos/hardware-configuration.nix
+    ./hardware.nix
     ./system.nix
     ./audio.nix
     ./locale.nix
@@ -14,6 +14,7 @@ in {
     ./laptop.nix
     ./hyprland.nix
     ./gnome.nix
+    ./driver.nix
   ];
 
   hyprland.enable = true;
