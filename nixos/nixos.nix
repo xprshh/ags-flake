@@ -21,6 +21,7 @@ in {
 
   users.users.${username} = {
     isNormalUser = true;
+    password = "changeme";
     initialPassword = username;
     extraGroups = [
       "nixosvmtest"
