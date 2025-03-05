@@ -14,7 +14,6 @@ in {
     ./laptop.nix
     ./hyprland.nix
     ./gnome.nix
-    ./driver.nix
   ];
 
   hyprland.enable = true;
