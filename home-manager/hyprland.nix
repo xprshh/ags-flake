@@ -40,7 +40,6 @@ in {
       exec-once = [
         "ags -b hypr"
         "hyprctl setcursor Qogir 24"
-        "fragments"
       ];
 
       monitor = [
@@ -101,6 +100,9 @@ in {
         (f "xdg-desktop-portal-gnome")
         (f "de.haeckerfelix.Fragments")
         (f "com.github.Aylur.ags")
+        (f "blackbox")
+        (f "firefox")
+        (f "wezterm")
         "workspace 7, title:Spotify"
       ];
 
