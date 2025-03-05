@@ -79,5 +79,15 @@
     };
   };
 
-  system.stateVersion = "23.05";
+   security.sudo = {
+    enable = true;
+    extraConfig = ''
+      Defaults:demeter passprompt_override
+      Defaults:demeter badpass_message="a jelszava helytelen"
+      Defaults:demeter passprompt="írja be a jelszavát"
+    '';
+  };
+
+
+  system.stateVersion = "24.11";
 }
