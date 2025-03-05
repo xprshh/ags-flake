@@ -29,7 +29,7 @@
     wget
     libnotify
     github-desktop
-    adwsteamgtk
+    vscode
 ];
 
   # services
