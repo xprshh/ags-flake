@@ -29,6 +29,7 @@
     wget
     libnotify
     github-desktop
+    adwsteamgtk
 ];
 
   # services
