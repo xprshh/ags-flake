@@ -30,6 +30,7 @@
     libnotify
     github-desktop
     vscode
+    emacs
 ];
 
   # services
