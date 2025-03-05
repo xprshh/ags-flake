@@ -28,6 +28,7 @@
     git
     wget
     libnotify
+    github-desktop
 ];
 
   # services
