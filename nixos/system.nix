@@ -27,7 +27,8 @@
     neovim
     git
     wget
-  ];
+    libnotify
+];
 
   # services
   services = {
