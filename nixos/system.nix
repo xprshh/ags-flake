@@ -29,8 +29,8 @@
     wget
     libnotify
     github-desktop
-    vscode
     emacs
+    blueman
 ];
 
   # services
