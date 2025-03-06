@@ -7,6 +7,12 @@
     auto-optimise-store = true;
   };
 
+nix.gc = {
+  automatic = true;
+  options = "--delete-older-than 3d";
+};
+
+
   # camera
   programs.droidcam.enable = true;
 
