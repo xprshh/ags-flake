@@ -1,9 +1,10 @@
-{ config, pkgs, lib, ... }:  
+{ config, pkgs, lib, ... }:  # Ensure pkgs is included
 
 {
   programs.emacs = {
     enable = true;
-    package = pkgs.emacs;  # We reference pkgs directly here
+    package = pkgs.emacs-gtk;  # Use emacs-gtk for GTK-based theming
+
     extraPackages = epkgs: lib.attrValues {
       inherit (epkgs)
         wal-mode
@@ -17,28 +18,27 @@
     };
 
     extraConfig = ''
-      ;; Set up package.el to work with MELPA, GNU, and NonGNU
+      ;; Set up package.el to work with MELPA
       (require 'package)
-      (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-                               ("gnu" . "https://elpa.gnu.org/packages/")
-                               ("nongnu" . "https://elpa.nongnu.org/nongnu/")))
+      (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
       (package-initialize)
 
       ;; Refresh package contents only if necessary
       (unless package-archive-contents
         (package-refresh-contents))
 
-      ;; Install use-package if not already installed
-      (unless (package-installed-p 'use-package)
-        (package-install 'use-package))
+      ;; Install Evil if it's not already installed
+      (unless (package-installed-p 'evil)
+        (package-install 'evil))
 
-      (require 'use-package)
-      (setq use-package-always-ensure t)
+      ;; Enable Evil mode
+      (require 'evil)
+      (evil-mode 1)
 
-      ;; Install and enable Evil mode
-      (use-package evil
-        :config
-        (evil-mode 1))
+      ;; Load nix-mode
+      (use-package nix-mode
+        :ensure t
+        :mode "\\.nix\\'")
     '';
   };
 }
