@@ -35,7 +35,6 @@ nix.gc = {
     wget
     libnotify
     github-desktop
-    emacs
     blueman
     obsidian
 ];
