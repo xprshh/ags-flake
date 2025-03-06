@@ -44,8 +44,4 @@
 }
 
 
-  # Install Ubuntu Nerd Font if necessary
-  environment.systemPackages = with pkgs; [
-    emacs-gtk
-  ];
-}
+
