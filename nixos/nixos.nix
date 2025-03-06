@@ -16,6 +16,7 @@ in {
     ./gnome.nix
     ./systemd.nix
     ./opengl.nix
+    ./time.nix
   ];
 
   hyprland.enable = true;
