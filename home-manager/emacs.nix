@@ -1,10 +1,12 @@
+{ config, pkgs, lib, ... }:  
+
 {
   programs.emacs = {
     enable = true;
-    package = pkgs.emacs;
-
+    package = pkgs.emacs;  # We reference pkgs directly here
     extraPackages = epkgs: lib.attrValues {
       inherit (epkgs)
+        wal-mode
         nix-mode
         magit
         tramp
