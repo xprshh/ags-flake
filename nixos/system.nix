@@ -37,6 +37,7 @@ nix.gc = {
     github-desktop
     emacs
     blueman
+    obsidian
 ];
 
   # services
