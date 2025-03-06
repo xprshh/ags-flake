@@ -40,6 +40,7 @@ in {
       exec-once = [
         "ags -b hypr"
         "hyprctl setcursor Qogir 24"
+        "nu ~/home-manager/scripts/monitor.nu"
       ];
 
       monitor = [
