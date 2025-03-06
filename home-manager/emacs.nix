@@ -3,7 +3,7 @@
 {
   programs.emacs = {
     enable = true;
-    package = pkgs.emacs-gtk;  # Use emacs-gtk for GTK-based theming
+    package = pkgs.emacs;  
 
     extraPackages = epkgs: lib.attrValues {
       inherit (epkgs)
@@ -41,4 +41,11 @@
         :mode "\\.nix\\'")
     '';
   };
+}
+
+
+  # Install Ubuntu Nerd Font if necessary
+  environment.systemPackages = with pkgs; [
+    emacs-gtk
+  ];
 }
