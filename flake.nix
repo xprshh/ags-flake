@@ -1,10 +1,12 @@
 {
-  description = "Configurations of Aylur";
+  description = "Configurations of Aylur and Pankomacs";
 
   outputs = inputs @ {
     self,
     home-manager,
     nixpkgs,
+    parts,
+    emacs,
     ...
   }: {
     packages.x86_64-linux.default =
@@ -26,7 +28,7 @@
       };
     };
 
-    # macos hm config
+    # macOS home-manager config
     homeConfigurations = {
       "demeter" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-darwin;
@@ -40,6 +42,14 @@
           })
         ];
       };
+    };
+
+    # Pankomacs configuration
+    formatter = nixpkgs.legacyPackages.x86_64-linux.alejandra;
+
+    packages.x86_64-linux.pgtk = self.lib.mkEmacs {
+      pkgs = nixpkgs.legacyPackages.x86_64-linux;
+      emacs = nixpkgs.legacyPackages.x86_64-linux.emacs30-pgtk;
     };
   };
 
@@ -75,6 +85,17 @@
     firefox-gnome-theme = {
       url = "github:rafaelmardojai/firefox-gnome-theme";
       flake = false;
+    };
+
+    # Pankomacs inputs
+    parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
+
+    emacs = {
+      url = "github:nix-community/emacs-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 }
