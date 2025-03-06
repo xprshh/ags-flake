@@ -1,7 +1,18 @@
 {
   programs.emacs = {
     enable = true;
-    package = pkgs.emacs-gtk;  # You can replace this with pkgs.emacs-gtk or another variant.
+    package = pkgs.emacs;
+
+    extraPackages = epkgs: lib.attrValues {
+      inherit (epkgs)
+        nix-mode
+        magit
+        tramp
+        notmuch
+        org
+        direnv
+        doom;
+    };
 
     extraConfig = ''
       ;; Set up package.el to work with MELPA, GNU, and NonGNU
