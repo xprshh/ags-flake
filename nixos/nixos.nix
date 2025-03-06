@@ -14,6 +14,8 @@ in {
     ./laptop.nix
     ./hyprland.nix
     ./gnome.nix
+    ./systemd.nix
+    ./opengl.nix
   ];
 
   hyprland.enable = true;
