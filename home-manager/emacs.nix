@@ -39,6 +39,87 @@
       (use-package nix-mode
         :ensure t
         :mode "\\.nix\\'")
+        (tool-bar-mode -1)
+(scroll-bar-mode -1)
+(menu-bar-mode -1)
+(global-display-line-numbers-mode +1)
+
+;; GCMH
+(use-package gcmh :ensure t :init
+  (gcmh-mode +1))
+
+;; Smartparens
+(use-package smartparens :ensure t
+  :init (smartparens-global-mode)
+  (require 'smartparens-config))
+
+;; Ivy
+(use-package ivy :ensure t
+  :init (ivy-mode))
+
+;; Start screen
+(setq inhibit-startup-message t)
+(setq inhibit-startup-echo-area-message "alex")
+
+;; Doom thingy
+(use-package mood-line :ensure t
+  :config (mood-line-mode)
+  :custom (mood-line-glyph-alist mood-line-format-default-extended))
+
+;; Typescript
+(use-package typescript-mode :ensure t)
+(use-package lsp-ui :ensure t)
+(use-package tree-sitter-langs :ensure t :defer t)
+(add-to-list 'auto-mode-alist '("\\.js?\\'" . typescript-mode))
+(add-hook 'typescript-mode-hook #'lsp)
+(add-hook 'lsp-mode-hook #'tree-sitter-hl-mode)
+
+;; Welcome
+(defun ar/show-welcome-buffer ()
+  "Show *Welcome* buffer."
+  (with-current-buffer (get-buffer-create "*Welcome*")
+    (setq truncate-lines t)
+    (let* ((buffer-read-only)
+           (image-path "~/.config/emacs/nixos.png")
+           (image (create-image image-path))
+           (size (image-size image))
+           (height (cdr size))
+           (width (car size))
+           (top-margin (floor (/ (- (window-height) height) 2)))
+           (left-margin (floor (/ (- (window-width) width) 2)))
+           (prompt-title "Welcome To River!"))
+      (erase-buffer)
+      (setq mode-line-format nil)
+      (goto-char (point-min))
+      (insert (make-string top-margin ?\n))
+      (insert (make-string left-margin ?\ ))
+      (insert-image image)
+      (insert "\n\n\n")
+      (insert (make-string (floor (/ (- (window-width) (string-width prompt-title)) 2)) ?\ ))
+      (insert prompt-title))
+    (setq cursor-type nil)
+    (read-only-mode +1)
+    (switch-to-buffer (current-buffer))
+    (local-set-key (kbd "q") 'kill-this-buffer)))
+
+(setq initial-scratch-message nil)
+(setq inhibit-startup-screen t)
+
+(when (< (length command-line-args) 2)
+  (add-hook 'emacs-startup-hook (lambda ()
+                                  (when (display-graphic-p)
+                                    (ar/show-welcome-buffer)))))
+
+
+(setq-default pixel-scroll-precision-mode t
+              fast-but-imprecise-scrolling t
+              mouse-wheel-scroll-amount '(1 ((shift) . 1)) ; one line at a time
+              mouse-wheel-progressive-speed nil ; don't accelerate scrolling
+              mouse-wheel-follow-mouse t ; scroll window under mouse
+              mouse-wheel-tilt-scroll t
+              scroll-margin 7
+              scroll-preserve-screen-position t
+              scroll-conservatively 10)    
     '';
   };
 }
