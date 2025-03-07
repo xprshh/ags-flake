@@ -3,20 +3,7 @@
 {
   programs.emacs = {
     enable = true;
-    package = pkgs.emacs;  
-
-    extraPackages = epkgs: lib.attrValues {
-      inherit (epkgs)
-        wal-mode
-        nix-mode
-        magit
-        tramp
-        notmuch
-        org
-        direnv
-        doom;
-    };
-
+    package = pkgs.emacs;
     extraConfig = ''
       ;; Set up package.el to work with MELPA
       (require 'package)
@@ -27,18 +14,10 @@
       (unless package-archive-contents
         (package-refresh-contents))
 
-      ;; Install Evil if it's not already installed
-      (unless (package-installed-p 'evil)
-        (package-install 'evil))
-
-      ;; Enable Evil mode
-      (require 'evil)
-      (evil-mode 1)
-
       ;; Load nix-mode
       (use-package nix-mode
         :ensure t
-        :mode "\\.nix\\'")
+        :mode "\\.nix\'")
         (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (menu-bar-mode -1)
@@ -56,6 +35,10 @@
 ;; Ivy
 (use-package ivy :ensure t
   :init (ivy-mode))
+
+;; Evil mode
+(use-package evil :ensure t :init
+  (evil-mode +1))
 
 ;; Start screen
 (setq inhibit-startup-message t)
@@ -80,7 +63,7 @@
   (with-current-buffer (get-buffer-create "*Welcome*")
     (setq truncate-lines t)
     (let* ((buffer-read-only)
-           (image-path "~/.config/emacs/nixos.png")
+           (image-path "~/wallpapers/images/nixos.png")
            (image (create-image image-path))
            (size (image-size image))
            (height (cdr size))
@@ -123,6 +106,3 @@
     '';
   };
 }
-
-
-
