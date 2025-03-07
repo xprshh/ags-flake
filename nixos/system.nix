@@ -38,6 +38,7 @@ nix.gc = {
     emacs-gtk
     blueman
     obsidian
+    gnome.gnome-tweaks
 ];
 
   # services
